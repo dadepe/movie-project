@@ -1,4 +1,5 @@
 {
+  "homepage": "https://dadepe.github.io/movie-project",
   "name": "movie-project",
   "version": "0.1.0",
   "private": true,
@@ -6,12 +7,23 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-indiana-drag-scroll": "^2.1.0",
+    "react-responsive-carousel": "^3.2.22",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-transition-group": "^4.4.2",
+    "sass": "^1.47.0",
+    "styled-components": "^5.3.3",
+    "throttle-debounce": "^3.0.1",
     "web-vitals": "^2.1.3"
   },
   "scripts": {
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }

@@ -1,0 +1,22 @@
+@import "variables";
+
+.button {
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  &-default {
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    width: 200px;
+    padding: 15px;
+    background-color: transparent;
+    color: $gold;
+    border: 2px solid $gold;
+    border-radius: 30px;
+  }
+}
