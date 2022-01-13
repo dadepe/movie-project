@@ -83,7 +83,7 @@ export default function Home(props) {
       {isLoading && (
         <LoadingContainer>
           <Spinner size={40} />
-          <Text>loading more movies from you...</Text>
+          <Text>loading more movies for you...</Text>
         </LoadingContainer>
       )}
       {isNextRendered && !isLoading && (
