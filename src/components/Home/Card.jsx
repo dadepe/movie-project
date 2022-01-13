@@ -1,7 +1,14 @@
 import Stars from "components/Stars"
 import styled from "styled-components"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
-import { gold, genreList, mediumDevice, textWhite, turquoise } from "config"
+import {
+  yellow,
+  genreList,
+  mediumDevice,
+  textWhite,
+  blue,
+  transBlue,
+} from "config"
 import { Link } from "react-router-dom"
 import { smallDevice } from "config"
 
@@ -31,6 +38,7 @@ const Image = styled.img`
   right: 0;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   border-radius: inherit;
   transition: all 1s;
@@ -44,30 +52,29 @@ const InfoContainer = styled(Column)`
   z-index: 2;
   position: absolute;
   inset: 0;
-  padding: 20px;
+  padding: 24px;
   justify-content: flex-end;
   background-image: linear-gradient(180deg, transparent, #000000ad);
+  @media (max-width: ${mediumDevice}px) {
+    padding: 10px;
+  }
 `
 
 const InfoWrapper = styled(Column)`
-  position: absolute;
-  bottom: 20;
+  position: relative;
+  bottom: -20px;
   transition: all 0.5s;
   ${Container}:hover & {
-    transform: translateY(-35px);
+    transform: translateY(-40px);
   }
 `
 
 const Title = styled.span`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
-  margin-top: 15px;
+  margin-top: 18px;
   @media (max-width: ${mediumDevice}px) {
-    margin-top: 10px;
-    font-size: 20px;
-  }
-  @media (max-width: ${smallDevice}px) {
-    margin-top: 7px;
+    margin-top: 6px;
     font-size: 16px;
   }
 `
@@ -75,23 +82,28 @@ const Title = styled.span`
 const Tag = styled.span`
   font-size: 14px;
   width: fit-content;
-  color: ${turquoise};
-  background-color: #19d8e43b;
-  padding: 3px 10px;
-  border-radius: 0 10px 0 10px;
+  color: ${blue};
+  background-color: ${transBlue};
+  padding: 4px 8px;
+  border-radius: 0 8px 0 8px;
+
+  @media (max-width: ${mediumDevice}px) {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
 `
 
 const StarsContainer = styled(Row)`
-  margin-top: 15px;
+  margin-top: 20px;
   @media (max-width: ${mediumDevice}px) {
-    display: none;
+    margin-top: 6px;
   }
 `
 
 const Button = styled.button`
   display: flex;
   align-items: center;
-  color: ${gold};
+  color: ${yellow};
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
@@ -125,7 +137,11 @@ export default function Card({ cardData, width = 100, height = 100, style }) {
 
   return (
     <Container
-      style={{ minWidth: `${width}%`, paddingTop: `${height}%`, ...style }}
+      style={{
+        minWidth: `min(${width}%, 292px)`,
+        paddingTop: `min(${height}%, 440px)`,
+        ...style,
+      }}
     >
       <Link to={`/${cardData.id}`} state={{ ...cardData }}>
         <InfoContainer>
@@ -138,7 +154,7 @@ export default function Card({ cardData, width = 100, height = 100, style }) {
           </InfoWrapper>
 
           <Button className="button">
-            Watch now <MdOutlineArrowForwardIos size={16} color={gold} />
+            Watch now <MdOutlineArrowForwardIos size={16} color={yellow} />
           </Button>
         </InfoContainer>
         <Image src={finalImage} alt={cardData.title} />

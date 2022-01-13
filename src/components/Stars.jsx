@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
 `
 
-export default function Stars({ rating, size = 16 }) {
+export default function Stars({ rating, size = 14 }) {
   const generateStars = () => {
     let ratingTemp = Number(rating / 2) * 100
     let result = []

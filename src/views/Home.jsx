@@ -24,13 +24,14 @@ const LoadingContainer = styled.div`
 `
 
 const Text = styled.span`
-  font-size: 20px;
+  font-size: 16px;
 `
 
 export default function Home(props) {
   const [movieData, setMovieData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isNextRendered, setIsNextRendered] = useState(false)
+  const [mounted, setMounted] = useState(true)
 
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -45,14 +46,19 @@ export default function Home(props) {
       // console.log("HANDLE BOTTOM HIT")
       setIsLoading(true)
       setTimeout(() => {
-        setIsLoading(false)
-        setIsNextRendered(true)
+        if (mounted) {
+          setIsLoading(false)
+          setIsNextRendered(true)
+        }
       }, 1500)
     }
   }
 
   useEffect(() => {
     fetchData()
+    return () => {
+      setMounted(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -76,7 +82,7 @@ export default function Home(props) {
       {/* Loading in here */}
       {isLoading && (
         <LoadingContainer>
-          <Spinner size={50} />
+          <Spinner size={40} />
           <Text>loading more movies from you...</Text>
         </LoadingContainer>
       )}

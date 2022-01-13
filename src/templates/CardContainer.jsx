@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Card from "components/Home/Card"
-import { gold } from "config"
-import { mediumDevice, textWhite, smallDevice } from "config"
+import { yellow } from "config"
+import { mediumDevice, textWhite } from "config"
 import styled from "styled-components"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
 import ScrollContainer from "react-indiana-drag-scroll"
@@ -21,6 +21,7 @@ const Container = styled(Column)`
   @media (max-width: ${mediumDevice}px) {
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 20px;
   }
 `
 
@@ -31,8 +32,8 @@ const Content = styled(Row)`
 `
 
 const Header = styled(Row)`
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: min(165px, 15%);
+  margin-right: min(165px, 15%);
   @media (max-width: ${mediumDevice}px) {
     margin-left: 0;
     margin-right: 0;
@@ -40,15 +41,12 @@ const Header = styled(Row)`
 `
 
 const Title = styled.h2`
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 500;
   margin: 0;
   line-height: 1.3;
   color: ${textWhite};
   @media (max-width: ${mediumDevice}px) {
-    font-size: 24px;
-  }
-  @media (max-width: ${smallDevice}px) {
     font-size: 20px;
   }
 `
@@ -56,7 +54,7 @@ const Title = styled.h2`
 const Button = styled.button`
   display: flex;
   align-items: center;
-  color: ${gold};
+  color: ${yellow};
   margin-left: auto;
 
   font-size: 16px;
@@ -67,18 +65,19 @@ const Button = styled.button`
   }
   @media (max-width: ${mediumDevice}px) {
     margin-right: 0;
+    font-size: 14px;
   }
 `
 
 const EmptyLeft = styled(Row)`
-  margin-left: 10%;
+  margin-left: min(165px, 15%);
   @media (max-width: ${mediumDevice}px) {
     display: none;
   }
 `
 
 const EmptyRight = styled(Row)`
-  margin-right: 10%;
+  margin-right: min(165px, 15%);
   @media (max-width: ${mediumDevice}px) {
     display: none;
   }
@@ -108,7 +107,7 @@ export default function CardContainer({ title = "Title", data = [] }) {
       <Header>
         <Title>{title}</Title>
         <Button className="button">
-          See All <MdOutlineArrowForwardIos size={16} color={gold} />
+          See All <MdOutlineArrowForwardIos size={16} color={yellow} />
         </Button>
       </Header>
       <Content>
@@ -120,7 +119,10 @@ export default function CardContainer({ title = "Title", data = [] }) {
               width={21}
               cardData={cardData}
               height={35}
-              style={{ marginRight: "2%" }}
+              style={{
+                marginRight:
+                  i !== shuffledData.length - 1 ? "min(30px, 3%)" : 0,
+              }}
             />
           ))}
 

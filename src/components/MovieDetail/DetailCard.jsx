@@ -1,6 +1,13 @@
 import Stars from "components/Stars"
 import { useNavigate } from "react-router-dom"
-import { textWhite, textGray, mediumDevice, turquoise, genreList } from "config"
+import {
+  textWhite,
+  textGray,
+  mediumDevice,
+  blue,
+  transBlue,
+  genreList,
+} from "config"
 import { MdOutlineArrowBackIos } from "react-icons/md"
 import styled from "styled-components"
 
@@ -17,7 +24,7 @@ const Container = styled.div`
   height: fit-content;
   @media (max-width: ${mediumDevice}px) {
     min-width: 100% !important;
-    padding-top: 90% !important;
+    padding-top: 75% !important;
   }
 `
 
@@ -31,6 +38,9 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  @media (max-width: ${mediumDevice}px) {
+    object-position: 0% 25%;
+  }
 `
 
 const InfoContainer = styled(Column)`
@@ -38,11 +48,11 @@ const InfoContainer = styled(Column)`
   z-index: 2;
   position: absolute;
   inset: 0;
-  padding: 30px;
+  padding: 32px;
   justify-content: flex-end;
   background-image: linear-gradient(180deg, transparent, #000000ad);
   @media (max-width: ${mediumDevice}px) {
-    padding: 20px;
+    padding: 20px 15px;
   }
 
   div,
@@ -55,7 +65,7 @@ const InfoContainer = styled(Column)`
 `
 
 const Title = styled.span`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   @media (max-width: ${mediumDevice}px) {
     font-size: 24px;
@@ -65,19 +75,27 @@ const Title = styled.span`
 const Tag = styled.span`
   font-size: 14px;
   width: fit-content;
-  color: ${turquoise};
-  background-color: #19d8e43b;
-  padding: 3px 10px;
-  border-radius: 0 10px 0 10px;
+  color: ${blue};
+  background-color: ${transBlue};
+  padding: 4px 8px;
+  border-radius: 0 8px 0 8px;
+
+  @media (max-width: ${mediumDevice}px) {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
 `
 
 const StarsContainer = styled(Row)`
   align-items: center;
   flex-wrap: wrap;
   span {
-    margin-left: 7px;
+    margin-left: 9px;
     &:last-child {
       color: ${textGray};
+      @media (max-width: ${mediumDevice}px) {
+        font-size: 10px;
+      }
     }
   }
 `
@@ -112,12 +130,16 @@ export default function DetailCard({
 }) {
   const navigate = useNavigate()
   const baseImgUrl = "https://image.tmdb.org/t/p/w300"
-  const finalImage = baseImgUrl + cardData.poster_path
-  const genre = genreList.find((x) => x.id === cardData.genre_ids[0])
+  const finalImage = baseImgUrl + cardData?.poster_path
+  const genre = genreList.find((x) => x.id === cardData?.genre_ids[0])
 
   return (
     <Container
-      style={{ minWidth: `${width}%`, paddingTop: `${height}%`, ...style }}
+      style={{
+        minWidth: `min(${width}%, 350px)`,
+        paddingTop: `min(${height}%, 527px)`,
+        ...style,
+      }}
     >
       <ArrowLeft className="button" onClick={() => navigate(-1)}>
         <MdOutlineArrowBackIos size={16} color={"#fff"} />
@@ -125,13 +147,13 @@ export default function DetailCard({
       <InfoContainer>
         <Tag>{genre?.name}</Tag>
         <StarsContainer>
-          <Stars rating={cardData.vote_average} />
+          <Stars rating={cardData?.vote_average} />
           <Text>•</Text>
-          <Text>Release Year : {cardData.release_date.substring(0, 4)}</Text>
+          <Text>Release Year : {cardData?.release_date.substring(0, 4)}</Text>
         </StarsContainer>
-        <Title>{cardData.title} </Title>
+        <Title>{cardData?.title} </Title>
       </InfoContainer>
-      <Image src={finalImage} alt={cardData.title} />
+      <Image src={finalImage} alt={cardData?.title} />
     </Container>
   )
 }

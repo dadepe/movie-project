@@ -3,8 +3,9 @@ export const smallDevice = 400
 export const textWhite = "#fff"
 export const textGray = "#b1b1b1"
 export const backgroundWeb = "#1d1d1d"
-export const gold = "#ead628"
-export const turquoise = "#00f0ff"
+export const yellow = "#FFE922"
+export const blue = "#0FEFFD"
+export const transBlue = "#0feffd1a"
 export const apiKey = "d296ca75e77481fb4bed199075ea7901"
 export const genreList = [
   {

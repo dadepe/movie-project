@@ -30,16 +30,18 @@ const Title = styled.span`
 
 const ListContainer = styled(Row)`
   flex: 1;
-  border-bottom: thin solid #333333;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
+  border-bottom: thin solid #4f4f4f;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
   &:last-child {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
     margin-bottom: 0;
   }
 `
 
 const ListHeader = styled(Row)`
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   flex-wrap: wrap;
 
   span {
@@ -49,10 +51,12 @@ const ListHeader = styled(Row)`
   }
   @media (max-width: ${mediumDevice}px) {
     flex-direction: column;
+    margin-bottom: 5px;
     span {
       &:last-child {
         margin-left: 0;
-        margin-top: 10px;
+        margin-top: 5px;
+        font-size: 10px;
       }
     }
   }
@@ -62,18 +66,18 @@ const ListTitle = styled.span`
   font-size: 20px;
   font-weight: 500;
   @media (max-width: ${mediumDevice}px) {
-    font-size: 18px;
+    font-size: 14px;
   }
 `
 
 const ImageContainer = styled.div`
   position: relative;
-  min-width: 30%;
-  padding-top: 17%;
+  min-width: min(30%, 160px);
+  padding-top: min(17%, 100px);
   height: fit-content;
   @media (max-width: ${mediumDevice}px) {
-    min-width: 40%;
-    padding-top: 25%;
+    min-width: min(40%, 109px);
+    padding-top: min(25%, 70px);
   }
 `
 
@@ -95,7 +99,7 @@ const ListInfoContainer = styled(Column)`
   flex: 1;
   margin-left: 15px;
   & > span {
-    line-height: 2;
+    line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -105,6 +109,9 @@ const ListInfoContainer = styled(Column)`
 
 const ListText = styled.span`
   color: ${textGray};
+  @media (max-width: ${mediumDevice}px) {
+    font-size: 10px;
+  }
 `
 
 const PlayButton = styled(Row)`
@@ -113,9 +120,12 @@ const PlayButton = styled(Row)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 8%;
+  padding: 14px;
   border-radius: 50%;
-  background-color: #00000073;
+  background-color: #1d1d1d83;
+  @media (max-width: ${mediumDevice}px) {
+    padding: 10px;
+  }
 `
 
 const ListEpisode = ({ img, state }) => {
@@ -123,16 +133,16 @@ const ListEpisode = ({ img, state }) => {
     <ListContainer>
       <ImageContainer>
         <PlayButton>
-          <FaPlay size={16} color={"#fff"} />
+          <FaPlay size={12} color={"#fff"} />
         </PlayButton>
         <Image src={img} alt="movie-episode" />
       </ImageContainer>
       <ListInfoContainer>
         <ListHeader>
-          <ListTitle>1 - {state.title}</ListTitle>
+          <ListTitle>1 - {state?.title}</ListTitle>
           <ListText>2h 30m</ListText>
         </ListHeader>
-        <ListText>{state.overview}</ListText>
+        <ListText>{state?.overview}</ListText>
       </ListInfoContainer>
     </ListContainer>
   )
@@ -140,7 +150,7 @@ const ListEpisode = ({ img, state }) => {
 
 export default function Episodes({ state }) {
   const baseImgUrl = "https://image.tmdb.org/t/p/w200"
-  const finalImage = baseImgUrl + state.backdrop_path
+  const finalImage = baseImgUrl + state?.backdrop_path
   return (
     <Container>
       <Title>Episodes</Title>

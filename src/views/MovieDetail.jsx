@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useParams, useLocation } from "react-router-dom"
 import axios from "axios"
 import styled from "styled-components"
@@ -12,9 +12,11 @@ const Container = styled.div`
 `
 
 export default function MovieDetail(props) {
+  const previousState = useRef(null)
   const { id } = useParams()
   const location = useLocation()
   const { state } = location
+  const [mount, setMount] = useState(true)
   const [similiarData, setSimiliarData] = useState([])
   const [castData, setCastData] = useState([])
 
@@ -39,9 +41,19 @@ export default function MovieDetail(props) {
     fetchCast()
   }, [id])
 
+  useEffect(() => {
+    return () => {
+      previousState.current = state
+      setMount(false)
+    }
+  }, [state])
+
   return (
     <Container>
-      <Detail state={state} castData={castData} />
+      <Detail
+        state={mount && state ? state : previousState.current}
+        castData={castData}
+      />
       <CardContainer title={"You Might Also Like This!"} data={similiarData} />
     </Container>
   )

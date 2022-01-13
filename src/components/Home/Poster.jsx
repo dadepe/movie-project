@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Carousel } from "react-responsive-carousel"
 import LogoImage from "assets/img/rdp-logo.png"
-import { turquoise, mediumDevice } from "config"
+import { blue, transBlue, mediumDevice } from "config"
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md"
 import Stars from "components/Stars"
 import { Link } from "react-router-dom"
@@ -20,9 +20,9 @@ const Column = styled(Row)`
 const Container = styled(Row)`
   position: relative;
   height: 80vh;
-  max-height: 600px;
+  max-height: 648px;
   @media (max-width: ${mediumDevice}px) {
-    height: 45vh;
+    height: max(280px, 35vh);
   }
 `
 
@@ -49,19 +49,31 @@ const PosterImage = styled.img`
   object-fit: cover;
 `
 
+const IconWrapper = styled(Row)`
+  margin-bottom: 100px;
+  @media (max-width: ${mediumDevice}px) {
+    margin-bottom: 34px;
+  }
+`
+
 const IconImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
+  @media (max-width: ${mediumDevice}px) {
+    width: 32px;
+    height: 32px;
+  }
 `
 
 const Content = styled(Column)`
+  position: relative;
   box-sizing: border-box;
   z-index: 2;
-  padding: 20px 10%;
+  padding: 20px min(165px, 15%);
   width: 100%;
   background-image: linear-gradient(270deg, transparent, #000000ad);
   @media (max-width: ${mediumDevice}px) {
-    padding: 10px 10px 10px 20px;
+    padding: 15px;
   }
   a {
     width: fit-content;
@@ -71,15 +83,19 @@ const Content = styled(Column)`
 const InfoContainer = styled(Column)`
   color: ${textWhite};
   height: 100%;
-  justify-content: center;
+  width: min(60%, 632px);
+  min-width: 350px;
   a {
     width: fit-content;
+  }
+  @media (max-width: ${mediumDevice}px) {
+    position: absolute;
+    height: auto;
+    bottom: 40px;
   }
 `
 
 const TextContainer = styled(Column)`
-  width: 60%;
-  min-width: 350px;
   h1,
   span {
     margin-top: 15px;
@@ -92,12 +108,16 @@ const TextContainer = styled(Column)`
 `
 
 const Title = styled.h2`
-  font-size: 50px;
+  font-size: 56px;
   font-weight: 500;
   margin: 0;
   line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   @media (max-width: ${mediumDevice}px) {
-    font-size: 28px;
+    font-size: 24px;
     margin-top: 7px;
   }
 `
@@ -105,10 +125,15 @@ const Title = styled.h2`
 const Tag = styled.span`
   font-size: 14px;
   width: fit-content;
-  color: ${turquoise};
-  background-color: #19d8e43b;
-  padding: 3px 10px;
-  border-radius: 0 10px 0 10px;
+  color: ${blue};
+  background-color: ${transBlue};
+  padding: 4px 8px;
+  border-radius: 0 8px 0 8px;
+
+  @media (max-width: ${mediumDevice}px) {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
 `
 
 const StarsContainer = styled(Row)`
@@ -119,6 +144,11 @@ const StarsContainer = styled(Row)`
 `
 
 const Overview = styled.span`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 2;
   @media (max-width: ${mediumDevice}px) {
     display: none;
   }
@@ -126,9 +156,9 @@ const Overview = styled.span`
 
 const Button = styled.button`
   margin-top: 20px;
+
   @media (max-width: ${mediumDevice}px) {
-    padding: 10px;
-    width: 150px;
+    margin-top: 12px;
   }
 
   &:hover {
@@ -186,10 +216,12 @@ const PosterCard = forwardRef(({ posterData }, ref) => {
     <PosterContainer ref={ref}>
       <PosterWrapper>
         <Content>
-          <Link to="/">
-            <IconImage src={LogoImage} alt={"rdp-logo"} />
-          </Link>
           <InfoContainer>
+            <IconWrapper>
+              <Link to="/">
+                <IconImage src={LogoImage} alt={"rdp-logo"} />
+              </Link>
+            </IconWrapper>
             <Tag>{genre?.name}</Tag>
             <StarsContainer>
               <Stars rating={posterData.vote_average} />
@@ -252,7 +284,7 @@ export default function Poster({ data = [] }) {
       </WebPoster>
       <MobilePoster>
         {data.length && (
-          <Carousel showStatus={false}>
+          <Carousel showStatus={false} showThumbs={false}>
             {data.map((posterData, i) => (
               <PosterCard key={i} posterData={posterData} />
             ))}
