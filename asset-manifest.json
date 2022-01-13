@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/movie-project/static/css/main.985916eb.css",
-    "main.js": "/movie-project/static/js/main.c385f73e.js",
+    "main.css": "/movie-project/static/css/main.1c3b2716.css",
+    "main.js": "/movie-project/static/js/main.ba7d4d10.js",
     "static/js/787.05b894fa.chunk.js": "/movie-project/static/js/787.05b894fa.chunk.js",
     "static/media/rdp-logo.png": "/movie-project/static/media/rdp-logo.d2e9abb3cd47d613c882.png",
     "index.html": "/movie-project/index.html",
-    "main.985916eb.css.map": "/movie-project/static/css/main.985916eb.css.map",
-    "main.c385f73e.js.map": "/movie-project/static/js/main.c385f73e.js.map",
+    "main.1c3b2716.css.map": "/movie-project/static/css/main.1c3b2716.css.map",
+    "main.ba7d4d10.js.map": "/movie-project/static/js/main.ba7d4d10.js.map",
     "787.05b894fa.chunk.js.map": "/movie-project/static/js/787.05b894fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.985916eb.css",
-    "static/js/main.c385f73e.js"
+    "static/css/main.1c3b2716.css",
+    "static/js/main.ba7d4d10.js"
   ]
 }
